@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tarea_dos_dos/widgets/MyTextField.dart';
+import 'package:tarea_dos_dos/widgets/MyTitle.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +21,12 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          constraints: BoxConstraints(maxWidth: 350),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+          ),
+        ),
       ),
       home: HomePage(),
     );
@@ -36,59 +44,33 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             MyTitle(title: "Cerveceria Almendra"),
-            SizedBox(height: 150),
+            SizedBox(height: 75),
             MyTextField(
               myLabel: Text("Usuario"),
               prefixIcon: Icon(Icons.account_circle),
             ),
+            SizedBox(height: 15),
             MyTextField(
-              myLabel: Text("Contraseña"),
-              prefixIcon: Icon(Icons.password),
+                myLabel: Text("Contraseña"),
+                prefixIcon: Icon(Icons.password),
+                suffixIconButton: IconButton(
+                    onPressed: () => {print("clicked")},
+                    icon: Icon(Icons.remove_red_eye))),
+            SizedBox(height: 25),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ElevatedButton(
+                  onPressed: () => {print("clicked")},
+                  child: Text("Login"),
+                ),
+                TextButton(
+                  onPressed: () => {print("clicked")},
+                  child: Text("Registrarse"),
+                ),
+              ],
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class MyTitle extends StatelessWidget {
-  final String title;
-  late TextStyle? style;
-  MyTitle({
-    super.key,
-    required this.title,
-    this.style,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    style = Theme.of(context).textTheme.displayMedium!;
-    return Center(
-      child: Text(
-        title,
-        style: style,
-      ),
-    );
-  }
-}
-
-class MyTextField extends StatelessWidget {
-  final Text myLabel;
-  final Icon? prefixIcon;
-  const MyTextField({
-    super.key,
-    this.prefixIcon,
-    required this.myLabel,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: TextField(
-        decoration: InputDecoration(
-          prefixIcon: prefixIcon,
-          label: myLabel,
         ),
       ),
     );
