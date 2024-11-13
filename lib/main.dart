@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:tarea_dos_dos/widgets/MyTextField.dart';
-import 'package:tarea_dos_dos/widgets/MyTitle.dart';
+import 'package:tarea_dos_dos/screens/signup.dart';
+import 'package:tarea_dos_dos/widgets/my_text_field.dart';
+import 'package:tarea_dos_dos/widgets/my_title.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+final _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => HomePage(),
+    ),
+    GoRoute(
+      //name: 'Signup',
+      path: '/signup',
+      builder: (context, state) => Signup(),
+    ),
+  ],
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
@@ -28,7 +44,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: HomePage(),
+      routerConfig: _router,
     );
   }
 }
@@ -65,7 +81,7 @@ class HomePage extends StatelessWidget {
                   child: Text("Login"),
                 ),
                 TextButton(
-                  onPressed: () => {print("clicked")},
+                  onPressed: () => {context.go('/signup')},
                   child: Text("Registrarse"),
                 ),
               ],
