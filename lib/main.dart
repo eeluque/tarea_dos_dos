@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tarea_dos_dos/screens/signup.dart';
-import 'package:tarea_dos_dos/widgets/my_text_field.dart';
-import 'package:tarea_dos_dos/widgets/my_title.dart';
+import 'package:tarea_dos_dos/widgets/my_custom_form.dart';
 import 'package:go_router/go_router.dart';
 
 void main() {
@@ -57,36 +56,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Column(
-          children: [
-            MyTitle(title: "Cerveceria Almendra"),
-            SizedBox(height: 75),
-            MyTextField(
-              myLabel: Text("Usuario"),
-              prefixIcon: Icon(Icons.account_circle),
-            ),
-            SizedBox(height: 15),
-            MyTextField(
-                myLabel: Text("Contraseña"),
-                prefixIcon: Icon(Icons.password),
-                suffixIconButton: IconButton(
-                    onPressed: () => {print("clicked")},
-                    icon: Icon(Icons.remove_red_eye))),
-            SizedBox(height: 25),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ElevatedButton(
-                  onPressed: () => {print("clicked")},
-                  child: Text("Login"),
-                ),
-                TextButton(
-                  onPressed: () => {context.go('/signup')},
-                  child: Text("Registrarse"),
-                ),
-              ],
-            ),
-          ],
+        child: Form(
+          child: Column(
+            children: [
+              MyCustomForm(),
+            ],
+          ),
         ),
       ),
     );
