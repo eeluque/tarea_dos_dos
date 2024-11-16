@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tarea_dos_dos/models/credentials.dart';
-import 'package:tarea_dos_dos/utils/utils.dart';
 import 'package:tarea_dos_dos/widgets/my_text_field.dart';
 import 'package:tarea_dos_dos/widgets/my_title.dart';
 
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({super.key});
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
 
   @override
-  State<MyCustomForm> createState() => _MyCustomFormState();
+  State<LoginForm> createState() => _LoginForm();
 }
 
-class _MyCustomFormState extends State<MyCustomForm> {
+class _LoginForm extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final userController = TextEditingController();
   final pwController = TextEditingController();
@@ -33,18 +31,30 @@ class _MyCustomFormState extends State<MyCustomForm> {
           MyTitle(title: "Cerveceria Almendra"),
           SizedBox(height: 75),
           MyTextField(
-            myLabel: Text("Usuario"),
-            prefixIcon: Icon(Icons.account_circle),
-            controller: userController,
-          ),
+              myLabel: Text("Usuario"),
+              prefixIcon: Icon(Icons.account_circle),
+              controller: userController,
+              validator: (usuario) {
+                if (usuario != "eeluque@unah.hn") {
+                  return "Usuario no es valido";
+                }
+                return null;
+              }),
           SizedBox(height: 15),
           MyTextField(
             controller: pwController,
             myLabel: Text("Contraseña"),
             prefixIcon: Icon(Icons.password),
             suffixIconButton: IconButton(
-                onPressed: () => {print("clicked")},
-                icon: Icon(Icons.remove_red_eye)),
+              onPressed: () => {print("clicked")},
+              icon: Icon(Icons.remove_red_eye),
+            ),
+            validator: (value) {
+              if (value != "20162000476") {
+                return "Contraseña no es valida";
+              }
+              return null;
+            },
           ),
           SizedBox(height: 25),
           Row(
@@ -52,8 +62,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
             children: [
               ElevatedButton(
                 onPressed: () => {
-                  checkCreds((Credentials(
-                      user: userController.text, pw: pwController.text)))
+                  if (_formKey.currentState!.validate()) {context.go('/home')}
                 },
                 child: Text("Login"),
               ),
