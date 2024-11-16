@@ -5,7 +5,7 @@ class MyTextField extends StatelessWidget {
   final Icon? prefixIcon;
   final IconButton? suffixIconButton;
   final TextEditingController? controller;
-  final FormFieldValidator? validator;
+  final FormFieldValidator<String>? validator;
   const MyTextField(
       {super.key,
       this.prefixIcon,
