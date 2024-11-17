@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tarea_dos_dos/widgets/my_title.dart';
 
 class Home extends StatelessWidget {

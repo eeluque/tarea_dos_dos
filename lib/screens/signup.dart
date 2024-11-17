@@ -183,6 +183,10 @@ class _SignupState extends State<Signup> {
                       final emailDisplay = emailController.text;
                       context.go('/home/$emailDisplay');
                     }
+                    print("Nombre: ${nameController.text}");
+                    print("Correo: ${emailController.text}");
+                    print("Telefono: ${phoneController.text}");
+                    print("Contraseña: ${pwController.text}");
                   },
                   child: Text("Registrarse"))
             ],
