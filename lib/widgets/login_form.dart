@@ -15,6 +15,14 @@ class _LoginForm extends State<LoginForm> {
   final userController = TextEditingController();
   final pwController = TextEditingController();
 
+  bool hidePW = true;
+
+  @override
+  void initState() {
+    super.initState();
+    hidePW = true;
+  }
+
   @override
   void dispose() {
     userController.dispose();
@@ -31,6 +39,7 @@ class _LoginForm extends State<LoginForm> {
           MyTitle(title: "Iniciar Sesion"),
           SizedBox(height: 75),
           MyTextField(
+              hidePW: false,
               myLabel: Text("Usuario"),
               prefixIcon: Icon(Icons.account_circle),
               controller: userController,
@@ -42,12 +51,19 @@ class _LoginForm extends State<LoginForm> {
               }),
           SizedBox(height: 15),
           MyTextField(
+            hidePW: hidePW,
             controller: pwController,
             myLabel: Text("Contraseña"),
             prefixIcon: Icon(Icons.password),
             suffixIconButton: IconButton(
-              onPressed: () => {print("clicked")},
-              icon: Icon(Icons.remove_red_eye),
+              icon: Icon(hidePW ? Icons.visibility : Icons.visibility_off),
+              onPressed: () {
+                setState(
+                  () {
+                    hidePW = !hidePW;
+                  },
+                );
+              },
             ),
             validator: (value) {
               if (value != "20162000476") {

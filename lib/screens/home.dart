@@ -20,12 +20,12 @@ class Home extends StatelessWidget {
             SizedBox(height: 15),
             Text(emailDisplay),
             SizedBox(height: 15),
-            ElevatedButton(
-              onPressed: () {
-                context.go('/');
-              },
-              child: Text("Back"),
-            )
+            // ElevatedButton(
+            //   onPressed: () {
+            //     context.go('/');
+            //   },
+            //   child: Text("Back"),
+            // )
           ],
         ),
       ),

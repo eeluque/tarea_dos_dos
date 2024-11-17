@@ -18,6 +18,14 @@ class _SignupState extends State<Signup> {
   final pwController = TextEditingController();
   final pwConfirmationController = TextEditingController();
 
+  bool hidePW = true;
+
+  @override
+  void initState() {
+    super.initState();
+    hidePW = true;
+  }
+
   @override
   void dispose() {
     nameController.dispose();
@@ -82,6 +90,7 @@ class _SignupState extends State<Signup> {
               MyTitle(title: "Registro"),
               SizedBox(height: 15),
               MyTextField(
+                  hidePW: false,
                   myLabel: Text("Nombre"),
                   controller: nameController,
                   validator: (name) {
@@ -92,6 +101,7 @@ class _SignupState extends State<Signup> {
                   }),
               SizedBox(height: 15),
               MyTextField(
+                  hidePW: false,
                   myLabel: Text("Correo"),
                   controller: emailController,
                   validator: (email) {
@@ -104,6 +114,7 @@ class _SignupState extends State<Signup> {
                   }),
               SizedBox(height: 15),
               MyTextField(
+                hidePW: false,
                 myLabel: Text("Telefono"),
                 controller: phoneController,
                 validator: (phone) {
@@ -120,6 +131,7 @@ class _SignupState extends State<Signup> {
               ),
               SizedBox(height: 15),
               MyTextField(
+                hidePW: hidePW,
                 myLabel: Text("Contraseña"),
                 controller: pwController,
                 validator: (password) {
@@ -131,17 +143,39 @@ class _SignupState extends State<Signup> {
                   }
                   return null;
                 },
+                suffixIconButton: IconButton(
+                  icon: Icon(hidePW ? Icons.visibility : Icons.visibility_off),
+                  onPressed: () {
+                    setState(
+                      () {
+                        hidePW = !hidePW;
+                      },
+                    );
+                  },
+                ),
               ),
               SizedBox(height: 15),
               MyTextField(
-                  myLabel: Text("Confirmar contraseña"),
-                  controller: pwConfirmationController,
-                  validator: (pwConfirmation) {
-                    if (pwConfirmation != pwController.text) {
-                      return "Las contraseñas no son iguales";
-                    }
-                    return null;
-                  }),
+                hidePW: hidePW,
+                myLabel: Text("Confirmar contraseña"),
+                controller: pwConfirmationController,
+                validator: (pwConfirmation) {
+                  if (pwConfirmation != pwController.text) {
+                    return "Las contraseñas no son iguales";
+                  }
+                  return null;
+                },
+                suffixIconButton: IconButton(
+                  icon: Icon(hidePW ? Icons.visibility : Icons.visibility_off),
+                  onPressed: () {
+                    setState(
+                      () {
+                        hidePW = !hidePW;
+                      },
+                    );
+                  },
+                ),
+              ),
               SizedBox(height: 15),
               ElevatedButton(
                   onPressed: () {
