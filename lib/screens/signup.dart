@@ -70,7 +70,10 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Cerveceria Almendra"),
+        backgroundColor: Colors.purple,
+      ),
       body: Center(
         child: Form(
           key: _formKey,
@@ -99,14 +102,18 @@ class _SignupState extends State<Signup> {
                     }
                     return null;
                   }),
+              SizedBox(height: 15),
               MyTextField(
                 myLabel: Text("Telefono"),
                 controller: phoneController,
                 validator: (phone) {
-                  if (phone != null &&
-                      (phone[0] != '3' || phone[0] != '9') &&
-                      (phone.length != 8)) {
-                    return "El numero ingresado no es valido";
+                  if (phone == null || phone.isEmpty) {
+                    return "Ingrese un numero";
+                  } else {
+                    if ((phone[0] != '3' || phone[0] != '9') &&
+                        phone.length != 8) {
+                      return "Numero ingresado no es valido";
+                    }
                   }
                   return null;
                 },
@@ -137,10 +144,12 @@ class _SignupState extends State<Signup> {
                   }),
               SizedBox(height: 15),
               ElevatedButton(
-                  onPressed: () => {
-                        if (_formKey.currentState!.validate())
-                          {context.go('/home')}
-                      },
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      final emailDisplay = emailController.text;
+                      context.go('/home/$emailDisplay');
+                    }
+                  },
                   child: Text("Registrarse"))
             ],
           ),

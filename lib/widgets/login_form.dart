@@ -28,7 +28,7 @@ class _LoginForm extends State<LoginForm> {
       key: _formKey,
       child: Column(
         children: [
-          MyTitle(title: "Cerveceria Almendra"),
+          MyTitle(title: "Iniciar Sesion"),
           SizedBox(height: 75),
           MyTextField(
               myLabel: Text("Usuario"),
@@ -61,8 +61,11 @@ class _LoginForm extends State<LoginForm> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ElevatedButton(
-                onPressed: () => {
-                  if (_formKey.currentState!.validate()) {context.go('/home')}
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    final emailDisplay = userController.text;
+                    context.go('/home/$emailDisplay');
+                  }
                 },
                 child: Text("Login"),
               ),

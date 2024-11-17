@@ -2,23 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tarea_dos_dos/widgets/my_title.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Home extends StatelessWidget {
+  final String emailDisplay;
+  Home({super.key, required this.emailDisplay});
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("Cerveceria Almendra"),
+        backgroundColor: Colors.purple,
+      ),
       body: Center(
         child: Column(
           children: [
             MyTitle(title: "Bienvenido"),
-            //Text(userEmail),
+            SizedBox(height: 15),
+            Text(emailDisplay),
+            SizedBox(height: 15),
             ElevatedButton(
               onPressed: () {
                 context.go('/');

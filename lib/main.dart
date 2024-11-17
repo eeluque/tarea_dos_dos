@@ -20,9 +20,9 @@ final _router = GoRouter(
       builder: (context, state) => Signup(),
     ),
     GoRoute(
-      path: '/home',
-      builder: (context, state) => Home(),
-    ),
+        path: '/home/:emailDisplay',
+        builder: (context, state) =>
+            Home(emailDisplay: state.pathParameters["emailDisplay"]!)),
   ],
 );
 
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.purple[100],
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
         textTheme: TextTheme(
@@ -59,15 +60,22 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Form(
-          child: Column(
-            children: [
-              LoginForm(),
-            ],
+      appBar: AppBar(
+        title: Text("Cerveceria Almendra"),
+        backgroundColor: Colors.purple,
+      ),
+      body: Stack(
+        children: [
+          Center(
+            child: Form(
+              child: Column(
+                children: [
+                  LoginForm(),
+                ],
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
